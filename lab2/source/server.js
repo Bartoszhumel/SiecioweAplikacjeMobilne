@@ -29,6 +29,17 @@ app.get('/', (req, res) => {
     image = `<img id="posterImage" src="${imgFile}"></img>`
   }
 
+  script =`const button1 = document.getElementById('videoCancel');
+  button1.addEventListener('click', function(e) {
+    const video = document.getElementById('videoPlayer');
+    video.setAttribute('src','cancel.mp4')
+  });
+  const button2 = document.getElementById('audioCancel');
+  button2.addEventListener('click', function(e) {
+    const audio = document.getElementById('audioPlayer');
+    audio.setAttribute('src','cancel.mp3)
+  });
+  `
   const html = `
     <html>
       <head>
@@ -37,7 +48,12 @@ app.get('/', (req, res) => {
       <body>
         ${player}
         ${image}
+        <button id="videoCancel">Video Cancel</button>
+        <button id="audioCancel">Audio Cancel</button>
       </body>
+      <script>
+        ${script}
+      </script>
     </html>
   `;
 
