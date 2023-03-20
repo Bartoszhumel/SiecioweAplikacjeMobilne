@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
   const button2 = document.getElementById('audioCancel');
   button2.addEventListener('click', function(e) {
     const audio = document.getElementById('audioPlayer');
-    audio.setAttribute('src','cancel.mp3)
+    audio.setAttribute('src','cancel.mp3')
   });
   `
   const html = `
