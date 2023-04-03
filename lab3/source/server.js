@@ -3,7 +3,6 @@ const url = require('url');
 
 
 var app = express();
-let playlist_table=[]
 
 
 app.get('/', (req, res) => {
@@ -12,13 +11,13 @@ app.get('/', (req, res) => {
   const audioFile = queryObject.audioFile;
   const imgFile = queryObject.posterFile;
   let player;
-
+  
   if(videoFile&&audioFile)
   {
     player = `<video id="videoPlayer" src="${videoFile}" controls></video>
               <audio id="audioPlayer" src="${audioFile}" controls></audio>`;
   }
-  if (videoFile) {
+  else if (videoFile) {
     player = `<video id="videoPlayer" src="${videoFile}" controls></video>`;
   } else if (audioFile) {
     player = `<audio id="audioPlayer" src="${audioFile}" controls></audio>`;
@@ -30,7 +29,9 @@ app.get('/', (req, res) => {
     image = `<img id="posterImage" src="${imgFile}"></img>`
   }
 
-  script =`const button1 = document.getElementById('videoCancel');
+  script =`
+  const id = 1;
+  const button1 = document.getElementById('videoCancel');
   button1.addEventListener('click', function(e) {
     const video = document.getElementById('videoPlayer');
     video.setAttribute('src','cancel.mp4')
@@ -40,8 +41,34 @@ app.get('/', (req, res) => {
     const audio = document.getElementById('audioPlayer');
     audio.setAttribute('src','cancel.mp3')
   });
+  const button3 = document.getElementById('audioAdd');
+  button3.addEventListener('click', function(e) {
+    const audio = document.getElementById('audioPlayer');
+    var tableRow = document.getElementById("table");
+    var row = tableRow.insertRow(-1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    cell1.innerHTML = id;
+    cell2.innerHTML = audio.getElementsByTagName('source');
+    cell3.innerHTML = "Audio";
+    id++;
+  });
+  const button4 = document.getElementById('videoAdd');
+  button4.addEventListener('click', function(e) {
+    const video = document.getElementById('videoPlayer');
+    var tableRow = document.getElementById("table");
+    var row = tableRow.insertRow(-1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    cell1.innerHTML = id;
+    cell2.innerHTML = video.getElementsByTagName('source');
+    cell3.innerHTML = "Video";
+    id++;
+  });
   `
-  table=`<table id="table">
+  table=`<table id="playlist_table">
   <tr>
   <td>No.</td>
   <td>URL</td>
@@ -60,9 +87,9 @@ app.get('/', (req, res) => {
         ${image}
         ${table}
         <button id="videoCancel">Video Cancel</button>
-        <button id="videoAdd" onclick="addvideo()">Click to add Video</button>
+        <button id="videoAdd">Click to add Video</button>
         <button id="audioCancel">Audio Cancel</button>
-        <button id="audioAdd" onclick="addaudio()">Click to add Audio</button>
+        <button id="audioAdd">Click to add Audio</button>
 
       </body>
       <script>
