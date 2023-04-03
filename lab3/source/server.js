@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
   }
 
   script =`
-  const id = 1;
+  let id = 1;
   const button1 = document.getElementById('videoCancel');
   button1.addEventListener('click', function(e) {
     const video = document.getElementById('videoPlayer');
@@ -44,28 +44,28 @@ app.get('/', (req, res) => {
   const button3 = document.getElementById('audioAdd');
   button3.addEventListener('click', function(e) {
     const audio = document.getElementById('audioPlayer');
-    var tableRow = document.getElementById("table");
+    var tableRow = document.getElementById("playlist_table");
     var row = tableRow.insertRow(-1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
     cell1.innerHTML = id;
-    cell2.innerHTML = audio.getElementsByTagName('source');
+    cell2.innerHTML = audio.getAttribute('src');
     cell3.innerHTML = "Audio";
-    id++;
+    id=id+1;
   });
   const button4 = document.getElementById('videoAdd');
   button4.addEventListener('click', function(e) {
     const video = document.getElementById('videoPlayer');
-    var tableRow = document.getElementById("table");
+    var tableRow = document.getElementById("playlist_table");
     var row = tableRow.insertRow(-1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
     cell1.innerHTML = id;
-    cell2.innerHTML = video.getElementsByTagName('source');
+    cell2.innerHTML = video.getAttribute('src');
     cell3.innerHTML = "Video";
-    id++;
+    id=id+1;
   });
   `
   table=`<table id="playlist_table">
