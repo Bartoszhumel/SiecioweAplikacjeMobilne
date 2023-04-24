@@ -77,6 +77,22 @@ app.get('/', (req, res) => {
     cell3.innerHTML = "Video";
     id=id+1;
   });
+  const button5 = document.getElementById('imgAdd');
+  button5.addEventListener('click', function(e) {
+    const image = document.getElementById('posterImage');
+    var tableRow = document.getElementById("playlist_table");
+    var row = tableRow.insertRow(-1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cellbutton = row.insertCell(3);
+    cellbutton.innerHTML = '<button class="removeRowButton" type="button" onClick="deleteRow(this)" >'
+    + 'Delete</button>';
+    cell1.innerHTML = id;
+    cell2.innerHTML = image.getAttribute('src');
+    cell3.innerHTML = "Image";
+    id=id+1;
+  });
   `
   table=`<table id="playlist_table">
   <tr>
@@ -101,6 +117,8 @@ app.get('/', (req, res) => {
         <button id="videoAdd">Click to add Video</button>
         <button id="audioCancel">Audio Cancel</button>
         <button id="audioAdd">Click to add Audio</button>
+        <button id="imgAdd">Click to add Image</button>
+
 
       </body>
       <script>
