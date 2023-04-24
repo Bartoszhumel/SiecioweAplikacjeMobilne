@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
   const queryObject = url.parse(req.url, true).query;
   const videoFile = queryObject.videoFile;
   const audioFile = queryObject.audioFile;
-  const imgFile = queryObject.posterFile;
+  const imgFile = queryObject.imgFile;
   let player;
   
   if(videoFile&&audioFile)
