@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
 
   script =`
   let id = 1;
+  function deleteRow(o) {
+    var p=o.parentNode.parentNode;
+        p.parentNode.removeChild(p);
+   }
   const button1 = document.getElementById('videoCancel');
   button1.addEventListener('click', function(e) {
     const video = document.getElementById('videoPlayer');
@@ -49,6 +53,9 @@ app.get('/', (req, res) => {
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
+    var cellbutton = row.insertCell(3);
+    cellbutton.innerHTML = '<button class="removeRowButton" type="button" onClick="deleteRow(this)" >'
+    + 'Delete</button>';
     cell1.innerHTML = id;
     cell2.innerHTML = audio.getAttribute('src');
     cell3.innerHTML = "Audio";
@@ -62,6 +69,9 @@ app.get('/', (req, res) => {
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
+    var cellbutton = row.insertCell(3);
+    cellbutton.innerHTML = '<button class="removeRowButton" type="button" onClick="deleteRow(this)" >'
+    + 'Delete</button>';
     cell1.innerHTML = id;
     cell2.innerHTML = video.getAttribute('src');
     cell3.innerHTML = "Video";
@@ -73,6 +83,7 @@ app.get('/', (req, res) => {
   <td>No.</td>
   <td>URL</td>
   <td>Value</td>
+  <td>Action</td>
   </tr>
   </table>
   <br>`
