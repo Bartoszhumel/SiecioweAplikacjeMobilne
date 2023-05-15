@@ -35,6 +35,21 @@ app.get('/', (req, res) => {
     var p=o.parentNode.parentNode;
         p.parentNode.removeChild(p);
    }
+   function upRow(o) {
+    var p=o.parentNode.parentNode;
+    var prev = p.previousSibling;
+    if (prev) {
+        p.parentNode.insertBefore(p, prev);
+    }
+    }
+    function downRow(o) {
+        var p=o.parentNode.parentNode;
+        var next = p.nextSibling;
+        if (next) {
+            p.parentNode.insertBefore(next, p);
+        }
+        }
+        
   const button1 = document.getElementById('videoCancel');
   button1.addEventListener('click', function(e) {
     const video = document.getElementById('videoPlayer');
@@ -59,6 +74,10 @@ app.get('/', (req, res) => {
     cell1.innerHTML = id;
     cell2.innerHTML = audio.getAttribute('src');
     cell3.innerHTML = "Audio";
+     var cellbuttonup = row.insertCell(4);
+    var cellbuttondown = row.insertCell(5);
+    cellbuttonup.innerHTML = '<button class="moveRowUpButton" type="button" onClick="upRow(this)" >'+ 'Up</button>';
+    cellbuttondown.innerHTML = '<button class="moveRowDownButton" type="button" onClick="downRow(this)" >'+ 'Down</button>';
     id=id+1;
   });
   const button4 = document.getElementById('videoAdd');
@@ -75,6 +94,10 @@ app.get('/', (req, res) => {
     cell1.innerHTML = id;
     cell2.innerHTML = video.getAttribute('src');
     cell3.innerHTML = "Video";
+    var cellbuttonup = row.insertCell(4);
+    var cellbuttondown = row.insertCell(5);
+    cellbuttonup.innerHTML = '<button class="moveRowUpButton" type="button" onClick="upRow(this)" >'+ 'Up</button>';
+    cellbuttondown.innerHTML = '<button class="moveRowDownButton" type="button" onClick="downRow(this)" >'+ 'Down</button>';
     id=id+1;
   });
   const button5 = document.getElementById('imgAdd');
@@ -86,8 +109,14 @@ app.get('/', (req, res) => {
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
     var cellbutton = row.insertCell(3);
+    var cellbuttonup = row.insertCell(4);
+    var cellbuttondown = row.insertCell(5);
+    cellbuttonup.innerHTML = '<button class="moveRowUpButton" type="button" onClick="upRow(this)" >'+ 'Up</button>';
+    cellbuttondown.innerHTML = '<button class="moveRowDownButton" type="button" onClick="downRow(this)" >'+ 'Down</button>';
+    
     cellbutton.innerHTML = '<button class="removeRowButton" type="button" onClick="deleteRow(this)" >'
     + 'Delete</button>';
+  
     cell1.innerHTML = id;
     cell2.innerHTML = image.getAttribute('src');
     cell3.innerHTML = "Image";
@@ -100,6 +129,9 @@ app.get('/', (req, res) => {
   <td>URL</td>
   <td>Value</td>
   <td>Action</td>
+  <td>Action</td>
+  <td>Action</td>
+
   </tr>
   </table>
   <br>`
