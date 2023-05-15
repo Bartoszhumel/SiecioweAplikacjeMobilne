@@ -38,8 +38,10 @@ app.get('/', (req, res) => {
    function upRow(o) {
     var p=o.parentNode.parentNode;
     var prev = p.previousSibling;
-    if (prev) {
+    if (prev.previousSibling) {
         p.parentNode.insertBefore(p, prev);
+    }else{
+        p.parentNode.insertBefore(p, null);
     }
     }
     function downRow(o) {
@@ -48,7 +50,11 @@ app.get('/', (req, res) => {
         if (next) {
             p.parentNode.insertBefore(next, p);
         }
+        else
+        {
+            p.parentNode.insertBefore(p, p.parentNode.firstChild.nextSibling);
         }
+    }
         
   const button1 = document.getElementById('videoCancel');
   button1.addEventListener('click', function(e) {
