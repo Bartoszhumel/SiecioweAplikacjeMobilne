@@ -45,10 +45,11 @@ app.get('/', (req, res) => {
     }
     }
     function downRow(o) {
+    console.log("zejscie");
         var p=o.parentNode.parentNode;
         var next = p.nextSibling;
         if (next) {
-            p.parentNode.insertBefore(next, p);
+            p.parentNode.insertBefore(p, next.nextSibling);
         }
         else
         {
@@ -80,8 +81,8 @@ app.get('/', (req, res) => {
     cell1.innerHTML = id;
     cell2.innerHTML = audio.getAttribute('src');
     cell3.innerHTML = "Audio";
-     var cellbuttonup = row.insertCell(4);
-    var cellbuttondown = row.insertCell(5);
+    var cellbuttonup = row.insertCell(3);
+    var cellbuttondown = row.insertCell(3);
     cellbuttonup.innerHTML = '<button class="moveRowUpButton" type="button" onClick="upRow(this)" >'+ 'Up</button>';
     cellbuttondown.innerHTML = '<button class="moveRowDownButton" type="button" onClick="downRow(this)" >'+ 'Down</button>';
     id=id+1;
@@ -100,8 +101,8 @@ app.get('/', (req, res) => {
     cell1.innerHTML = id;
     cell2.innerHTML = video.getAttribute('src');
     cell3.innerHTML = "Video";
-    var cellbuttonup = row.insertCell(4);
-    var cellbuttondown = row.insertCell(5);
+    var cellbuttonup = row.insertCell(3);
+    var cellbuttondown = row.insertCell(3);
     cellbuttonup.innerHTML = '<button class="moveRowUpButton" type="button" onClick="upRow(this)" >'+ 'Up</button>';
     cellbuttondown.innerHTML = '<button class="moveRowDownButton" type="button" onClick="downRow(this)" >'+ 'Down</button>';
     id=id+1;
@@ -115,8 +116,8 @@ app.get('/', (req, res) => {
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
     var cellbutton = row.insertCell(3);
-    var cellbuttonup = row.insertCell(4);
-    var cellbuttondown = row.insertCell(5);
+    var cellbuttonup = row.insertCell(3);
+    var cellbuttondown = row.insertCell(3);
     cellbuttonup.innerHTML = '<button class="moveRowUpButton" type="button" onClick="upRow(this)" >'+ 'Up</button>';
     cellbuttondown.innerHTML = '<button class="moveRowDownButton" type="button" onClick="downRow(this)" >'+ 'Down</button>';
     
@@ -135,9 +136,6 @@ app.get('/', (req, res) => {
   <td>URL</td>
   <td>Value</td>
   <td>Action</td>
-  <td>Action</td>
-  <td>Action</td>
-
   </tr>
   </table>
   <br>`
