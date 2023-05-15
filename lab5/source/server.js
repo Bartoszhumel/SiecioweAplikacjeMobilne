@@ -36,23 +36,21 @@ app.get('/', (req, res) => {
         p.parentNode.removeChild(p);
    }
    function upRow(o) {
-    var p=o.parentNode.parentNode;
-    var prev = p.previousSibling;
-    if (prev.previousSibling) {
-        p.parentNode.insertBefore(p, prev);
-    }else{
-        p.parentNode.insertBefore(p, null);
-    }
-    }
+      var p=o.parentNode.parentNode;
+      var prev = p.previousSibling;
+      if (prev!=p.parentNode.firstChild){
+          p.parentNode.insertBefore(p, prev);
+      }else{
+          p.parentNode.insertBefore(p, null);
+      }
+   }
     function downRow(o) {
-    console.log("zejscie");
         var p=o.parentNode.parentNode;
         var next = p.nextSibling;
-        if (next) {
+        if (p!=p.parentNode.lastChild){
             p.parentNode.insertBefore(p, next.nextSibling);
         }
-        else
-        {
+        else{
             p.parentNode.insertBefore(p, p.parentNode.firstChild.nextSibling);
         }
     }
