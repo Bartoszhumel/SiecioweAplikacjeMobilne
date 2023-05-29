@@ -65,9 +65,11 @@ app.get('/', (req, res) => {
    function upRow(o) {
       var p=o.parentNode.parentNode;
       var prev = p.previousSibling;
-      if (prev!=p.parentNode.firstChild){
+      if (prev.previousSibling!=p.parentNode.firstChild){
+      console.log(prev);
           p.parentNode.insertBefore(p, prev);
       }else{
+       console.log(prev);
           p.parentNode.insertBefore(p, null);
       }
    }
@@ -81,7 +83,6 @@ app.get('/', (req, res) => {
             p.parentNode.insertBefore(p, p.parentNode.firstChild.nextSibling);
         }
     }
-        
   const button1 = document.getElementById('videoCancel');
   button1.addEventListener('click', function(e) {
     const video = document.getElementById('videoPlayer');
@@ -143,9 +144,9 @@ app.get('/', (req, res) => {
     var cellbutton = row.insertCell(3);
     var cellbuttonup = row.insertCell(3);
     var cellbuttondown = row.insertCell(3);
+    
     cellbuttonup.innerHTML = '<button class="moveRowUpButton" type="button" onClick="upRow(this)" >'+ 'Up</button>';
     cellbuttondown.innerHTML = '<button class="moveRowDownButton" type="button" onClick="downRow(this)" >'+ 'Down</button>';
-    
     cellbutton.innerHTML = '<button class="removeRowButton" type="button" onClick="deleteRow(this)" >'
     + 'Delete</button>';
   
@@ -163,10 +164,10 @@ app.get('/', (req, res) => {
   }
   table=`<table id="playlist_table">
   <tr>
-  <td>No.</td>
-  <td>URL</td>
-  <td>Value</td>
-  <td>Action</td>
+  <th>No.</th>
+  <th>URL</th>
+  <th>Value</th>
+  <th>Action</th>
   </tr>
   </table>
   <br>`
