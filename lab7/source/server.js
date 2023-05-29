@@ -15,12 +15,20 @@ app.get('/', (req, res) => {
   if(videoFile&&audioFile)
   {
     player = `<video id="videoPlayer" src="${videoFile}" controls></video>
-              <audio id="audioPlayer" src="${audioFile}" controls></audio>`;
+              <audio id="audioPlayer" src="${audioFile}" controls></audio>
+                <button id="videoPlay">Play Video</button>
+                <button id="audioPlay">Play Audio</button>
+                <button id="videoPause">Pause Video</button>
+                <button id="audioPause">Pause Audio</button>`;
   }
   else if (videoFile) {
-    player = `<video id="videoPlayer" src="${videoFile}" controls></video>`;
+    player = `<video id="videoPlayer" src="${videoFile}" controls></video>
+<button id="videoPlay">Play Video</button>
+                <button id="videoPause">Pause Video</button>`;
   } else if (audioFile) {
-    player = `<audio id="audioPlayer" src="${audioFile}" controls></audio>`;
+    player = `<audio id="audioPlayer" src="${audioFile}" controls></audio>
+<button id="audioPlay">Play Audio</button>
+                <button id="audioPause">Pause Audio</button>`;
   } else {
     player = 'No media file specified.';
   }
@@ -28,7 +36,26 @@ app.get('/', (req, res) => {
   if(imgFile){
     image = `<img id="posterImage" src="${imgFile}"></img>`
   }
-
+  let playerbuttons=`  const button6 = document.getElementById('videoPlay');
+  button6.addEventListener('click', function(e) {
+    const video= document.getElementById('videoPlayer');
+    video.play();
+  });
+  const button9 = document.getElementById('videoPause');
+    button9.addEventListener('click', function(e) {
+    const video= document.getElementById('videoPlayer');
+    video.pause();
+    });`
+  let audioButtons=`const button7 = document.getElementById('audioPlay');
+  button7.addEventListener('click', function(e) {
+    const audio= document.getElementById('audioPlayer');
+    audio.play();
+  });
+  const button8 = document.getElementById('audioPause');
+  button8.addEventListener('click', function(e) {
+    const audio= document.getElementById('audioPlayer');
+    audio.pause();
+  });`;
   script =`
   let id = 1;
   function deleteRow(o) {
@@ -128,6 +155,12 @@ app.get('/', (req, res) => {
     id=id+1;
   });
   `
+  if(videoFile){
+    script = script + playerbuttons;
+  }
+  if(audioFile) {
+    script = script + audioButtons;
+  }
   table=`<table id="playlist_table">
   <tr>
   <td>No.</td>
@@ -147,6 +180,7 @@ app.get('/', (req, res) => {
         ${player}
         ${image}
         ${table}
+       
         <button id="videoCancel">Video Cancel</button>
         <button id="videoAdd">Click to add Video</button>
         <button id="audioCancel">Audio Cancel</button>
